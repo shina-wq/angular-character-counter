@@ -35,7 +35,9 @@ export class App implements OnInit, OnDestroy {
     const saved = this.savedTheme();
     this.theme.set(saved ?? this.systemTheme());
     this.systemPrefersLight.addEventListener('change', this.followSystemTheme);
-    console.log(`[App] ngOnInit: theme "${this.theme()}" from ${saved ? 'saved choice' : 'system setting'}`);
+    console.log(
+      `[App] ngOnInit: theme "${this.theme()}" from ${saved ? 'saved choice' : 'system setting'}`,
+    );
   }
 
   // Stop listening to the system setting so the listener doesn't leak

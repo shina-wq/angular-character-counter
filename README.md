@@ -1,59 +1,55 @@
-# AngularCharacterCounter
+# Character Counter
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+Analyze text as you type: character, word and sentence counts, reading time and letter density, with an optional character limit.
 
-## Development server
+Built with Angular and Tailwind CSS.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+- Live character, word and sentence counts, with an option to exclude spaces
+- Optional character limit that warns as you approach it and blocks extra input
+- Approximate reading time
+- Letter density, showing the top five letters with an option to see all
+- Light and dark themes that follow your system and remember your choice
+- Responsive layout and full keyboard support
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech stack
 
-## Code scaffolding
+- [Angular 22](https://angular.dev): standalone components, signals, zoneless change detection
+- [Tailwind CSS v4](https://tailwindcss.com)
+- TypeScript
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Getting started
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Requires Node.js 22.22+ or 24.15+.
 
 ```bash
-ng build
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Then open [http://localhost:4200](http://localhost:4200).
 
-## Running unit tests
+| Command         | Description                           |
+| --------------- | ------------------------------------- |
+| `npm start`     | Start the dev server with live reload |
+| `npm run build` | Build for production into `dist/`     |
+| `npm run watch` | Rebuild on changes (development)      |
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Project structure
 
-```bash
-ng test
+```
+src/app/
+├── app.ts              Root component: holds the state and theme
+├── text-stats.ts       Text analysis functions
+├── header/             Logo and theme toggle
+├── text-input/         Text area, options and limit warning
+├── stat-cards/         Character, word and sentence counts
+└── letter-density/     Letter frequency bars
 ```
 
-## Running end-to-end tests
+`App` owns the state and passes it to each component through inputs. Components report user changes back through outputs.
 
-For end-to-end (e2e) testing, run:
+## Acknowledgements
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Design from the [Frontend Mentor](https://www.frontendmentor.io) Character Counter challenge.

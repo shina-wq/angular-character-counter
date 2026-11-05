@@ -9,9 +9,14 @@
         <li class="col-span-full grid grid-cols-subgrid items-center">
           <span>{{ row.letter }}</span>
           <span class="h-3 rounded-full bg-neutral-100 dark:bg-neutral-800">
-            <span class="block h-full rounded-full bg-purple-400" [style.width.%]="row.percent"></span>
+            <span
+              class="block h-full rounded-full bg-purple-400"
+              [style.width.%]="row.percent"
+            ></span>
           </span>
-          <span class="justify-self-end">{{ row.count }} ({{ row.percent | number: '1.2-2' }}%)</span>
+          <span class="justify-self-end">
+            {{ row.count }} ({{ row.percent | number: '1.2-2' }}%)
+          </span>
         </li>
       }
     </ul>
@@ -27,8 +32,20 @@
       (click)="expanded.set(!expanded())"
     >
       {{ expanded() ? 'See less' : 'See more' }}
-      <svg class="size-4 motion-safe:transition-transform" [class.rotate-180]="expanded()" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4 6 4 4 4-4" />
+      <svg
+        class="size-4 motion-safe:transition-transform"
+        [class.rotate-180]="expanded()"
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="m4 6 4 4 4-4"
+        />
       </svg>
     </button>
   }

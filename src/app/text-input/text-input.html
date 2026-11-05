@@ -43,7 +43,12 @@
     </label>
 
     <label class="checkbox">
-      <input #limitBox type="checkbox" [checked]="limitEnabled()" (change)="toggleLimit(limitBox.checked)" />
+      <input
+        #limitBox
+        type="checkbox"
+        [checked]="limitEnabled()"
+        (change)="toggleLimit(limitBox.checked)"
+      />
       Set Character Limit
     </label>
     @if (limitEnabled()) {

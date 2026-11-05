@@ -1,4 +1,4 @@
-import { Component, input, OnChanges, output, signal } from '@angular/core';
+import { Component, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
 
 const DEFAULT_LIMIT = 300;
 const NEAR_LIMIT_RATIO = 0.9; // heads-up once 90% of the limit is used
@@ -23,7 +23,8 @@ export class TextInput implements OnChanges {
   protected limitMessage = '';
 
   // Re-check the limit whenever the text or the limit changes
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('[TextInput] ngOnChanges:', Object.keys(changes));
     const limit = this.limit();
     const length = this.text().length;
 

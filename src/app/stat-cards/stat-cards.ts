@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, input, OnChanges } from '@angular/core';
+import { Component, input, OnChanges, SimpleChanges } from '@angular/core';
 import { countCharacters, countSentences, countWords } from '../text-stats';
 
 interface StatCard {
@@ -20,7 +20,8 @@ export class StatCards implements OnChanges {
   protected cards: StatCard[] = [];
 
   // Recount whenever the text or the exclude-spaces option changes
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('[StatCards] ngOnChanges:', Object.keys(changes));
     const text = this.text();
     const excludeSpaces = this.excludeSpaces();
 

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, input, OnChanges, signal } from '@angular/core';
+import { Component, computed, input, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { LetterCount, letterDensity } from '../text-stats';
 
 const PREVIEW_COUNT = 5;
@@ -20,7 +20,8 @@ export class LetterDensity implements OnChanges {
   );
 
   // Recalculate the letter frequencies whenever the text changes
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('[LetterDensity] ngOnChanges:', Object.keys(changes));
     this.rows.set(letterDensity(this.text()));
   }
 }

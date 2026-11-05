@@ -1,1 +1,19 @@
-<p>text-input works!</p>
+<div class="grid gap-3">
+  <label class="sr-only" for="text-input">Text to analyze</label>
+  <textarea
+    id="text-input"
+    class="h-50 resize-none rounded-xl border-2 border-neutral-200 bg-neutral-100 p-5 font-input text-lg/[1.4] tracking-normal text-neutral-700 placeholder:text-current hover:bg-neutral-200 focus-visible:border-purple-500 focus-visible:shadow-[0_0_10px_var(--color-purple-400)] focus-visible:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
+    placeholder="Start typing here… (or paste your text)"
+  ></textarea>
+
+  <!-- Options: stacked on mobile, one row from tablet up -->
+  <div class="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-3">
+    <label class="checkbox basis-full md:mr-3.5 md:basis-auto">
+      <input type="checkbox" /> Exclude Spaces
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" /> Set Character Limit
+    </label>
+    <p class="basis-full md:ml-auto md:basis-auto">Approx. reading time: 0 minute</p>
+  </div>
+</div>

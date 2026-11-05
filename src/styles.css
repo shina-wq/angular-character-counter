@@ -18,6 +18,8 @@
   --color-yellow-500: #ff9f00;
   --color-orange-500: #fe8159;
   --color-orange-800: #da3701;
+  /* Limit warning: darker orange in light mode for contrast, swapped for dark mode below */
+  --color-error: var(--color-orange-800);
 
   --font-sans: 'DM Sans', sans-serif;
   --font-input: 'Open Sans', sans-serif;
@@ -38,6 +40,10 @@
 }
 
 @layer base {
+  [data-theme='dark'] {
+    --color-error: var(--color-orange-500);
+  }
+
   body {
     @apply bg-neutral-0 bg-[url(/images/bg-noise-light.webp)] text-preset-4 tracking-[-0.6px] text-neutral-900;
     @apply dark:bg-neutral-900 dark:bg-[url(/images/bg-noise-dark.webp)] dark:text-neutral-200;

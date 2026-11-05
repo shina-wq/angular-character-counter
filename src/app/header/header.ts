@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+
+export type Theme = 'light' | 'dark';
 
 @Component({
-  imports: [],
   selector: 'app-header',
   templateUrl: './header.html',
 })
-export class Header {}
+export class Header {
+  readonly theme = input.required<Theme>();
+  readonly themeToggle = output<void>();
+}

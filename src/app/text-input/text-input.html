@@ -1,19 +1,63 @@
 <div class="grid gap-3">
   <label class="sr-only" for="text-input">Text to analyze</label>
+  <!-- maxlength stops typing and pasting at the limit; text already over it is kept -->
   <textarea
+    #textBox
     id="text-input"
-    class="h-50 resize-none rounded-xl border-2 border-neutral-200 bg-neutral-100 p-5 font-input text-lg/[1.4] tracking-normal text-neutral-700 placeholder:text-current hover:bg-neutral-200 focus-visible:border-purple-500 focus-visible:shadow-[0_0_10px_var(--color-purple-400)] focus-visible:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
+    class="h-50 resize-none rounded-xl border-2 border-neutral-200 bg-neutral-100 p-5 font-input text-lg/[1.4] tracking-normal text-neutral-700 placeholder:text-current hover:bg-neutral-200 focus-visible:border-purple-500 focus-visible:shadow-[0_0_10px_var(--color-purple-400)] focus-visible:outline-none aria-invalid:border-error! aria-invalid:shadow-[0_0_8px_var(--color-error)] aria-invalid:focus-visible:shadow-[inset_0_0_0_1px_var(--color-error),0_0_12px_var(--color-error)] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
     placeholder="Start typing here… (or paste your text)"
+    [value]="text()"
+    [attr.maxlength]="limit()"
+    [attr.aria-invalid]="limitReached"
+    [attr.aria-describedby]="limitMessage ? 'limit-message' : null"
+    (input)="textChange.emit(textBox.value)"
   ></textarea>
 
-  <!-- Options: stacked on mobile, one row from tablet up -->
+  @if (limitMessage) {
+    <p
+      id="limit-message"
+      role="alert"
+      class="flex items-start gap-2 font-input text-sm/[1.3] tracking-[-0.3px]"
+      [class.text-error]="limitReached"
+    >
+      <svg class="mt-0.5 size-3.5 flex-none" viewBox="5 5 13.56 13.56" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M11.78 5.88a5.9 5.9 0 1 0-.01 11.8 5.9 5.9 0 0 0 .01-11.8m0-.88a6.8 6.8 0 0 1 6.78 6.78A6.78 6.78 0 1 1 11.78 5m-.98 9.4h.32v-3.28h-.32a.3.3 0 0 1-.33-.32v-.22c0-.17.13-.33.33-.33h1.3c.17 0 .34.16.34.33v3.83h.33c.16 0 .32.16.32.32v.22c0 .2-.16.33-.32.33H10.8a.32.32 0 0 1-.33-.33v-.22c0-.16.13-.32.33-.32m.98-6.56a.9.9 0 0 1 .88.88c0 .5-.41.87-.88.87a.86.86 0 0 1-.87-.87c0-.47.38-.88.87-.88"
+        />
+      </svg>
+      {{ limitMessage }}
+    </p>
+  }
+
+  <!-- Options: stacked on mobile (limit field stays beside its label), one row from tablet up -->
   <div class="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-3">
     <label class="checkbox basis-full md:mr-3.5 md:basis-auto">
-      <input type="checkbox" /> Exclude Spaces
+      <input
+        #excludeBox
+        type="checkbox"
+        [checked]="excludeSpaces()"
+        (change)="excludeSpacesChange.emit(excludeBox.checked)"
+      />
+      Exclude Spaces
     </label>
+
     <label class="checkbox">
-      <input type="checkbox" /> Set Character Limit
+      <input #limitBox type="checkbox" [checked]="limitEnabled()" (change)="toggleLimit(limitBox.checked)" />
+      Set Character Limit
     </label>
-    <p class="basis-full md:ml-auto md:basis-auto">Approx. reading time: 0 minute</p>
+    @if (limitEnabled()) {
+      <input
+        #limitField
+        type="number"
+        min="1"
+        aria-label="Character limit"
+        class="ml-2 h-7.25 w-13.75 [appearance:textfield] rounded-md border border-neutral-200 bg-transparent px-2 font-input tracking-normal hover:bg-neutral-100 dark:border-neutral-600 dark:hover:bg-neutral-800 [&::-webkit-inner-spin-button]:appearance-none"
+        [value]="limit() ?? ''"
+        (input)="setLimit(limitField.valueAsNumber)"
+      />
+    }
+
+    <p class="basis-full md:ml-auto md:basis-auto">Approx. reading time: {{ readingTime() }}</p>
   </div>
 </div>

@@ -61,7 +61,7 @@
     @apply flex cursor-pointer items-center gap-2.5;
 
     input {
-      @apply size-4 cursor-pointer appearance-none rounded-sm border;
+      @apply size-4 cursor-pointer appearance-none rounded-sm border hover:bg-purple-400/30;
       @apply checked:border-transparent checked:bg-purple-400 checked:bg-[url(/images/icon-check.svg)] checked:bg-size-[0.75rem] checked:bg-center checked:bg-no-repeat;
       @apply checked:hover:bg-purple-500;
     }

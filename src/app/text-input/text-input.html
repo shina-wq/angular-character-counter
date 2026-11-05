@@ -52,7 +52,7 @@
         type="number"
         min="1"
         aria-label="Character limit"
-        class="ml-2 h-7.25 w-13.75 [appearance:textfield] rounded-md border border-neutral-200 bg-transparent px-2 font-input tracking-normal hover:bg-neutral-100 dark:border-neutral-600 dark:hover:bg-neutral-800 [&::-webkit-inner-spin-button]:appearance-none"
+        class="ml-2 h-7.25 w-13.75 [appearance:textfield] rounded-md border bg-transparent px-2 font-input tracking-normal hover:bg-neutral-100 dark:hover:bg-neutral-800 [&::-webkit-inner-spin-button]:appearance-none"
         [value]="limit() ?? ''"
         (input)="setLimit(limitField.valueAsNumber)"
       />

@@ -27,7 +27,7 @@
       (click)="expanded.set(!expanded())"
     >
       {{ expanded() ? 'See less' : 'See more' }}
-      <svg class="size-4 transition-transform" [class.rotate-180]="expanded()" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <svg class="size-4 motion-safe:transition-transform" [class.rotate-180]="expanded()" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4 6 4 4 4-4" />
       </svg>
     </button>

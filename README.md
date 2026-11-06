@@ -15,7 +15,7 @@ Built with Angular and Tailwind CSS.
 
 ## Tech stack
 
-- [Angular 22](https://angular.dev): standalone components, signals, zoneless change detection
+- [Angular 22](https://angular.dev)
 - [Tailwind CSS v4](https://tailwindcss.com)
 - TypeScript
 

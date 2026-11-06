@@ -18,10 +18,10 @@
   <button
     type="button"
     class="grid size-8 flex-none cursor-pointer place-items-center rounded-md bg-neutral-100 hover:bg-neutral-200 md:size-11 md:rounded-lg dark:bg-neutral-700 dark:hover:bg-neutral-600"
-    [attr.aria-label]="theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    aria-label="Toggle dark mode"
     (click)="themeToggle.emit()"
   >
-    <!-- Inline so the icons inherit the text colour via currentColor -->
+    <!-- Inline so the icons inherit the text colour; CSS shows the one for the current theme -->
     <svg class="w-5 md:w-5.5 dark:hidden" viewBox="0 0 20 20" aria-hidden="true">
       <path
         fill="currentColor"

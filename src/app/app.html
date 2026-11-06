@@ -1,22 +1,26 @@
-<div class="mx-auto grid max-w-[61.875rem] gap-14 lg:gap-12">
-  <app-header [theme]="theme()" (themeToggle)="toggleTheme()" />
+<div class="px-4 pt-4 pb-8 md:px-8 lg:pt-8 lg:pb-16">
+  <div class="mx-auto grid max-w-[61.875rem] gap-14 lg:gap-12">
+    <!-- (event) binding: listen to the child's @Output -->
+    <app-header (themeToggle)="toggleTheme()" />
 
-  <main class="grid gap-10 lg:gap-12">
-    <h1
-      class="mx-auto max-w-[31.875rem] text-center text-preset-1 text-neutral-900 dark:text-neutral-100"
-    >
-      Analyze your text in real-time.
-    </h1>
-    <app-text-input
-      [text]="text()"
-      [excludeSpaces]="excludeSpaces()"
-      [limit]="limit()"
-      [readingTime]="readingTime()"
-      (textChange)="text.set($event)"
-      (excludeSpacesChange)="excludeSpaces.set($event)"
-      (limitChange)="limit.set($event)"
-    />
-    <app-stat-cards [text]="text()" [excludeSpaces]="excludeSpaces()" />
-    <app-letter-density [text]="text()" />
-  </main>
+    <main class="grid gap-10 lg:gap-12">
+      <h1
+        class="mx-auto max-w-[31.875rem] text-center text-preset-1 text-neutral-900 dark:text-neutral-100"
+      >
+        Analyze your text in real-time.
+      </h1>
+
+      <!-- [(x)] two-way binding = [x] @Input + (xChange) @Output -->
+      <app-text-input
+        [(text)]="text"
+        [(excludeSpaces)]="excludeSpaces"
+        [(limit)]="limit"
+        [readingTime]="readingTime"
+      />
+
+      <!-- [x] property binding: one-way, parent → child -->
+      <app-stat-cards [text]="text" [excludeSpaces]="excludeSpaces" />
+      <app-letter-density [text]="text" />
+    </main>
+  </div>
 </div>

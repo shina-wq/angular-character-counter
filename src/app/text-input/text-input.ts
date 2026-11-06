@@ -1,53 +1,60 @@
-import { Component, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 
 const DEFAULT_LIMIT = 300;
-const NEAR_LIMIT_RATIO = 0.9; // heads-up once 90% of the limit is used
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInput implements OnChanges {
-  readonly text = input.required<string>();
-  readonly excludeSpaces = input.required<boolean>();
-  readonly limit = input.required<number | null>();
-  readonly readingTime = input.required<string>();
+  // Data in from the parent
+  @Input() text = '';
+  @Input() excludeSpaces = false;
+  @Input() limit: number | null = null;
+  @Input() readingTime = '';
 
-  readonly textChange = output<string>();
-  readonly excludeSpacesChange = output<boolean>();
-  readonly limitChange = output<number | null>();
+  // Events out to the parent. The "Change" suffix enables [(text)] two-way binding
+  @Output() textChange = new EventEmitter<string>();
+  @Output() excludeSpacesChange = new EventEmitter<boolean>();
+  @Output() limitChange = new EventEmitter<number | null>();
 
-  // Only this component cares whether the limit field is visible
-  protected readonly limitEnabled = signal(false);
-  protected limitReached = false;
-  protected limitMessage = '';
+  // Local UI state: only this component needs to know if the limit field is open
+  limitEnabled = false;
+  limitReached = false;
+  warning = '';
 
-  // Re-check the limit whenever the text or the limit changes
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('[TextInput] ngOnChanges:', Object.keys(changes));
-    const limit = this.limit();
-    const length = this.text().length;
+  // ngOnChanges runs every time the parent passes a new input value
+  ngOnChanges(): void {
+    const length = this.text.length;
+    const limit = this.limit;
 
     this.limitReached = limit !== null && length >= limit;
 
-    // Fixed wording (no live count) so screen readers announce it once, not on every keystroke
     if (limit === null) {
-      this.limitMessage = '';
+      this.warning = '';
     } else if (this.limitReached) {
-      this.limitMessage = `Limit reached! Your text ${length > limit ? 'exceeds' : 'has reached'} ${limit} characters.`;
-    } else if (length >= limit * NEAR_LIMIT_RATIO) {
-      this.limitMessage = `Almost there! You're close to the ${limit}-character limit.`;
+      this.warning = `Limit reached! Your text ${length > limit ? 'exceeds' : 'has reached'} ${limit} characters.`;
+    } else if (length >= limit * 0.9) {
+      this.warning = `Almost there! You're close to the ${limit}-character limit.`;
     } else {
-      this.limitMessage = '';
+      this.warning = '';
     }
   }
 
-  protected toggleLimit(enabled: boolean): void {
-    this.limitEnabled.set(enabled);
+  toggleLimit(enabled: boolean): void {
+    this.limitEnabled = enabled;
     this.limitChange.emit(enabled ? DEFAULT_LIMIT : null);
   }
 
-  protected setLimit(value: number): void {
+  setLimit(value: number): void {
     this.limitChange.emit(value >= 1 ? Math.floor(value) : null);
   }
 }

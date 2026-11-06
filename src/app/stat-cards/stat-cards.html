@@ -1,12 +1,12 @@
 <dl class="grid gap-4 md:grid-cols-3">
-  @for (card of cards; track $index) {
+  @for (card of cards; track card.background) {
     <!-- The label (dt) comes first for screen readers; flex-col-reverse shows the value on top -->
     <div
       class="flex h-32.5 flex-col-reverse justify-center gap-2 rounded-xl bg-position-[right_-3.125rem_top_-0.625rem] bg-size-[9.375rem] bg-no-repeat p-5 text-neutral-900 md:h-37.5 md:bg-position-[right_-4.375rem_top] md:px-3 md:py-4 lg:bg-position-[right_-1.875rem_top] lg:px-4"
       [class]="card.background"
     >
       <dt class="text-preset-3">{{ card.label }}</dt>
-      <dd class="text-preset-1">{{ card.value | number: '2.0-0' }}</dd>
+      <dd class="text-preset-1">{{ card.value }}</dd>
     </div>
   }
 </dl>

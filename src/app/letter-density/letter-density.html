@@ -2,10 +2,10 @@
 <section class="-mt-4 grid gap-5 lg:-mt-6">
   <h2 class="text-preset-2">Letter Density</h2>
 
-  @if (rows().length) {
+  @if (rows.length) {
     <!-- Rows share one grid (subgrid) so every bar starts and ends at the same place -->
     <ul class="grid grid-cols-[1rem_1fr_auto] gap-x-3.5 gap-y-3">
-      @for (row of visibleRows(); track row.letter) {
+      @for (row of visibleRows; track row.letter) {
         <li class="col-span-full grid grid-cols-subgrid items-center">
           <span>{{ row.letter }}</span>
           <span class="h-3 rounded-full bg-neutral-100 dark:bg-neutral-800">
@@ -14,9 +14,7 @@
               [style.width.%]="row.percent"
             ></span>
           </span>
-          <span class="justify-self-end">
-            {{ row.count }} ({{ row.percent | number: '1.2-2' }}%)
-          </span>
+          <span class="justify-self-end">{{ row.count }} ({{ row.percent.toFixed(2) }}%)</span>
         </li>
       }
     </ul>
@@ -24,17 +22,17 @@
     <p>No characters found. Start typing to see letter density.</p>
   }
 
-  @if (hasMore()) {
+  @if (rows.length > previewCount) {
     <button
       type="button"
       class="flex cursor-pointer items-center gap-2 justify-self-start rounded-sm text-preset-3 hover:underline hover:underline-offset-4"
-      [attr.aria-expanded]="expanded()"
-      (click)="expanded.set(!expanded())"
+      [attr.aria-expanded]="expanded"
+      (click)="expanded = !expanded"
     >
-      {{ expanded() ? 'See less' : 'See more' }}
+      {{ expanded ? 'See less' : 'See more' }}
       <svg
         class="size-4 motion-safe:transition-transform"
-        [class.rotate-180]="expanded()"
+        [class.rotate-180]="expanded"
         viewBox="0 0 16 16"
         fill="none"
         aria-hidden="true"

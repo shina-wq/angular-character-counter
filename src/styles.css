@@ -61,9 +61,13 @@
     @apply flex cursor-pointer items-center gap-2.5;
 
     input {
-      @apply size-4 cursor-pointer appearance-none rounded-sm border hover:bg-purple-400/30;
+      @apply size-4 cursor-pointer appearance-none rounded-sm border border-neutral-900 hover:border-neutral-600;
+      @apply dark:border-neutral-200 dark:hover:border-neutral-0;
       @apply checked:border-transparent checked:bg-purple-400 checked:bg-[url(/images/icon-check.svg)] checked:bg-size-[0.75rem] checked:bg-center checked:bg-no-repeat;
       @apply checked:hover:bg-purple-500;
+      /* Focus ring from the design: 2px white gap, then 2px purple */
+      @apply focus-visible:shadow-[0_0_0_2px_var(--color-neutral-0),0_0_0_4px_var(--color-purple-400)] focus-visible:outline-none;
+      @apply not-checked:focus-visible:border-neutral-200 not-checked:focus-visible:bg-neutral-0;
     }
   }
 }

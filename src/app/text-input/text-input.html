@@ -4,7 +4,7 @@
   <textarea
     #textBox
     id="text-input"
-    class="h-50 resize-none rounded-xl border-2 border-neutral-200 bg-neutral-100 p-5 font-input text-lg/[1.4] tracking-normal text-neutral-700 placeholder:text-current hover:bg-neutral-200 focus-visible:border-purple-500 focus-visible:shadow-[0_0_10px_var(--color-purple-400)] focus-visible:outline-none aria-invalid:border-error! aria-invalid:shadow-[0_0_8px_var(--color-error)] aria-invalid:focus-visible:shadow-[inset_0_0_0_1px_var(--color-error),0_0_12px_var(--color-error)] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
+    class="h-50 resize-none rounded-xl border-2 border-neutral-200 bg-neutral-100 p-5 text-preset-3 text-neutral-900 placeholder:text-current hover:bg-neutral-200 focus-visible:border-purple-500 focus-visible:shadow-[0_0_10px_var(--color-purple-400)] focus-visible:outline-none aria-invalid:border-error! aria-invalid:shadow-[0_0_8px_var(--color-error)] aria-invalid:focus-visible:shadow-[inset_0_0_0_1px_var(--color-error),0_0_12px_var(--color-error)] dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:not-focus-visible:border-neutral-600"
     placeholder="Start typing here… (or paste your text)"
     [value]="text"
     [attr.maxlength]="limit"
@@ -57,7 +57,7 @@
         type="number"
         min="1"
         aria-label="Character limit"
-        class="ml-2 h-7.25 w-13.75 [appearance:textfield] rounded-md border bg-transparent px-2 font-input tracking-normal hover:bg-neutral-100 dark:hover:bg-neutral-800 [&::-webkit-inner-spin-button]:appearance-none"
+        class="ml-2 h-7.25 w-13.75 [appearance:textfield] rounded-md border border-neutral-600 bg-transparent px-3 dark:text-neutral-0 [&::-webkit-inner-spin-button]:appearance-none"
         [value]="limit ?? ''"
         (input)="setLimit(limitField.valueAsNumber)"
       />

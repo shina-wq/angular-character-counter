@@ -9,16 +9,6 @@ type Theme = 'light' | 'dark';
 
 const THEME_KEY = 'character-counter:theme';
 
-/**
- * Root (parent) component. It owns all the state and passes it DOWN to its
- * children with @Input(). Children send changes back UP with @Output().
- *
- *   App
- *   ├── Header         (themeToggle) ↑
- *   ├── TextInput      [(text)] [(excludeSpaces)] [(limit)] [readingTime] ↓↑
- *   ├── StatCards      [text] [excludeSpaces] ↓
- *   └── LetterDensity  [text] ↓
- */
 @Component({
   selector: 'app-root',
   imports: [Header, TextInput, StatCards, LetterDensity],

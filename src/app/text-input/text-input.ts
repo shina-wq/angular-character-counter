@@ -15,13 +15,11 @@ const DEFAULT_LIMIT = 300;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInput implements OnChanges {
-  // Data in from the parent
   @Input() text = '';
   @Input() excludeSpaces = false;
   @Input() limit: number | null = null;
   @Input() readingTime = '';
 
-  // Events out to the parent. The "Change" suffix enables [(text)] two-way binding
   @Output() textChange = new EventEmitter<string>();
   @Output() excludeSpacesChange = new EventEmitter<boolean>();
   @Output() limitChange = new EventEmitter<number | null>();
